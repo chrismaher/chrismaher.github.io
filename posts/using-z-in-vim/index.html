@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Using Z in Vim // Chris Maher</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Chris Maher" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/chrismaher.github.io/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Using Z in Vim"/>
+<meta name="twitter:description" content="The Z script is a popular utility for directory-hopping on Unix-y systems (popular alternatives include fasd and autojump). It tracks visited directories, and, when invoked with a directory substring, jumps to a matching directory; when presented with multiple matches, it jumps to the first match from its &lsquo;frecency&rsquo; algorithm. So if you&rsquo;re in your ~/Documents directory and want to jump to your ~/go/src/ directory, you can jump by simply entering z src."/>
+
+    <meta property="og:title" content="Using Z in Vim" />
+<meta property="og:description" content="The Z script is a popular utility for directory-hopping on Unix-y systems (popular alternatives include fasd and autojump). It tracks visited directories, and, when invoked with a directory substring, jumps to a matching directory; when presented with multiple matches, it jumps to the first match from its &lsquo;frecency&rsquo; algorithm. So if you&rsquo;re in your ~/Documents directory and want to jump to your ~/go/src/ directory, you can jump by simply entering z src." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="chrismaher.github.io/posts/using-z-in-vim/" />
+<meta property="article:published_time" content="2020-08-29T18:01:06-04:00" />
+<meta property="article:modified_time" content="2020-08-29T18:01:06-04:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="chrismaher.github.io"><img class="app-header-avatar" src="/chrismaher.github.io/images/avatar.jpg" alt="Chris Maher" /></a>
+      <h1>Chris Maher</h1>
+      <p>Data Carpentry/Philosophy</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/chrismaher" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://www.linkedin.com/in/chris-maher-8b3b9638/" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Using Z in Vim</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 29, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>The <a href="https://github.com/rupa/z">Z script</a> is a popular utility for directory-hopping on Unix-y systems (popular alternatives include <a href="https://github.com/clvv/fasd">fasd</a> and <a href="https://github.com/wting/autojump">autojump</a>). It tracks visited directories, and, when invoked with a directory substring, jumps to a matching directory; when presented with multiple matches, it jumps to the first match from its <a href="https://en.wikipedia.org/wiki/Frecency">&lsquo;frecency&rsquo;</a> algorithm. So if you&rsquo;re in your <code>~/Documents</code> directory and want to jump to your <code>~/go/src/</code> directory, you can jump by simply entering <code>z src</code>. Not long after adopting Z, I found myself wanting to use Z as a command in Vim to set the working directory for different tabs (a new approach I&rsquo;ve taken to juggling multiple projects from a single Vim session). I first looked at what plugin functionality existed for Z-Vim integration; the primary plugin I found is appropriately named <a href="https://github.com/lingceng/z.vim">z.vim</a>, and you may find it works for you. Since my desired feature set was both small &amp; specific, I decided to write a command myself to add to my .vimrc.</p>
+<h3 id="implementation">Implementation</h3>
+<p>First, the entire .vimrc snippet:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">s</span>:<span style="color:#a6e22e">z</span>(<span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">lin</span>, <span style="color:#a6e22e">pos</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">list</span> = <span style="color:#a6e22e">systemlist</span>(<span style="color:#e6db74">&#39;_z -l &#39;</span> . <span style="color:#a6e22e">a</span>:<span style="color:#a6e22e">arg</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">return</span> <span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">list</span>, {<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> -&gt; <span style="color:#a6e22e">substitute</span>(<span style="color:#a6e22e">v</span>, <span style="color:#e6db74">&#39;\S\+\s\+&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)})<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endfunction</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">command</span>! -<span style="color:#a6e22e">nargs</span>=<span style="color:#ae81ff">1</span> -<span style="color:#a6e22e">complete</span>=<span style="color:#a6e22e">customlist</span>,&lt;<span style="color:#a6e22e">SID</span>&gt;<span style="color:#a6e22e">z</span> <span style="color:#a6e22e">Z</span> <span style="color:#a6e22e">execute</span> <span style="color:#e6db74">&#39;tcd &#39;</span> . &lt;<span style="color:#a6e22e">SID</span>&gt;<span style="color:#a6e22e">z</span>(&lt;<span style="color:#a6e22e">q</span>-<span style="color:#a6e22e">args</span>&gt;, <span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>The function <code>s:z</code> is script-local and needs to accept three arguments (given the names <code>arg, lin, pos</code> in this case) to enable <a href="http://vimdoc.sourceforge.net/htmldoc/map.html#:command-completion-customlist">command-completion from a custom list</a>, which allows us to simulate Z&rsquo;s tab-completion from the Vim command line.</p>
+<p>The next step is to pass the first argument to the shell command <code>_z -l</code>; <code>z</code> itself is actually an alias for <code>_z 2&gt;&amp;1</code> (as seen <a href="https://github.com/rupa/z/blob/master/z.sh#L223">here</a>), and so instead of invoking the alias, we call the <code>_z</code> function directly and pass the <code>-l</code> option, which prints matches and their frecency scores to stdout instead of changing directory. Note that an <code>-e</code> option also exists, which should echo the best match (instead of cd&rsquo;ing to it), but I&rsquo;ve found in my Z shell that this doesn&rsquo;t work as expected.</p>
+<p>We then parse the results from the system call to <code>_z -l</code> to obtain an ordered list of the matching filenames (without their frecency scores, since we can rely instead on just the ordering) and return the list to the caller.</p>
+<p>The final step is to create the necessary command. We enable tab-completion from a custom list using <code>-complete=customlist,&lt;SID&gt;z</code>, which will populate the completion list using our z function itself. The main body of the command will call <code>tcd</code>, so that we can maintain tab-specific working directories, with the result from calling our z function with the command-line argument.</p>
+<h3 id="usage">Usage</h3>
+<p>The usage of this new command is pretty straightforward: just call <code>:Z src</code>, for instance, to set the working directory of the current tab to whatever matches <code>src</code>, just as if we had called <code>z src</code> from the shell.</p>
+<p>And that&rsquo;s it! Hopefully you find that this command saves you some keystrokes.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
