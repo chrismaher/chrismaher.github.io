@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chris Maher</title>
-    <link>chrismaher.github.io/</link>
+    <link>https://chrismaher.github.io/</link>
     <description>Recent content on Chris Maher</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 01 Nov 2020 00:12:52 -0400</lastBuildDate>
     
-	<atom:link href="chrismaher.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chrismaher.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Minimum Viable Optparse-Applicative</title>
-      <link>chrismaher.github.io/posts/minimum-viable-optparse-applicative/</link>
+      <link>https://chrismaher.github.io/posts/minimum-viable-optparse-applicative/</link>
       <pubDate>Sun, 01 Nov 2020 00:12:52 -0400</pubDate>
       
-      <guid>chrismaher.github.io/posts/minimum-viable-optparse-applicative/</guid>
+      <guid>https://chrismaher.github.io/posts/minimum-viable-optparse-applicative/</guid>
       <description>There are plenty of good blog posts &amp;amp; examples for optparse-applicative on the web, but this example offers a minimum viable optparse-applicative program:
 import Options.Applicative import Data.String (IsString) parser :: IsString s =&amp;gt; Parser s parser = strArgument mempty parserInfo :: IsString a =&amp;gt; ParserInfo a parserInfo = info parser mempty main :: IO () main = execParser parserInfo &amp;gt;&amp;gt;= putStrLn The program doesn&amp;rsquo;t do much; it accepts and prints exactly one argument.</description>
     </item>
     
     <item>
       <title>Using Z in Vim</title>
-      <link>chrismaher.github.io/posts/using-z-in-vim/</link>
+      <link>https://chrismaher.github.io/posts/using-z-in-vim/</link>
       <pubDate>Sat, 29 Aug 2020 18:01:06 -0400</pubDate>
       
-      <guid>chrismaher.github.io/posts/using-z-in-vim/</guid>
+      <guid>https://chrismaher.github.io/posts/using-z-in-vim/</guid>
       <description>The Z script is a popular utility for directory-hopping on Unix-y systems (alternatives include fasd and autojump). It tracks visited directories, and, when invoked with a directory substring, jumps to a matching directory; when presented with multiple matches, it jumps to the first match from its &amp;lsquo;frecency&amp;rsquo; algorithm. So if you&amp;rsquo;re in your ~/Documents directory and want to jump to your ~/go/src/ directory, you may be able to do so by simply entering z src, for instance.</description>
     </item>
     
